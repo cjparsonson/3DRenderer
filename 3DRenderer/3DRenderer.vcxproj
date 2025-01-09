@@ -146,6 +146,14 @@
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="cube.obj">
+      <FileType>Text</FileType>
+    </Text>
+    <Text Include="f22.obj">
+      <FileType>Text</FileType>
+    </Text>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
