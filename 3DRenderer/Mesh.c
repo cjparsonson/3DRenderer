@@ -66,15 +66,16 @@ void load_obj_file_data(char* filename)
 	// load the vertices and faces in our mesh.vertices and mesh.faces arrays
 	FILE* file;
 	char str[50];
-	file = fopen_s(&file, filename, "r");
+	fopen_s(&file, filename, "r");
 	if (!file)
 	{
-		printf("Failed to open file: %s\n", filename);		
+		printf("Failed to open file: %s\n", filename);
+		return;
 	}
 	// Each line of the file which begins with a single v is a vertex and needs to be read and pushed to the mesh.vertices array
 	// Each line of the file which begins with a single f is a face and needs to be read and pushed to the mesh.faces array 
 	// However faces are stored like this: f 1/1/1 2/2/2 3/3/3 and we only need the first number of each group
-	while (fgets(str, 49, file) != NULL)
+	while (fgets(str, 50, file) != NULL)
 	{
 		if (str[0] == 'v' && str[1] == ' ')
 		{

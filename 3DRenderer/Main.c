@@ -18,6 +18,8 @@ vec3_t camera_position = { .x = 0, .y = 0, .z = -5 };
 
 float fov_factor = 640;
 
+bool obj_from_blender = true; // Blender uses a right-handed coordinate system
+
 void setup(void)
 {
 	// Allocate memory in bytes to hold the colour buffer
@@ -31,7 +33,7 @@ void setup(void)
 		window_height);
 
 	// Loads the cube values in the mesh data structure
-	load_obj_file_data("cube.obj");
+	load_obj_file_data("f22.obj");
 }
 
 void process_input(void)
@@ -53,7 +55,7 @@ void process_input(void)
 	}
 }
 
-// Function that recieves a 3D vecor and returns a projected 2D point
+// Function that recieves a 3D vector and returns a projected 2D point
 vec2_t project(vec3_t point)
 {
 	vec2_t projected_point = {
@@ -106,6 +108,12 @@ void update(void)
 
 			// Translate the vertex away from the camera
 			transformed_vertex.z -= camera_position.z;
+
+			// Invert the Z value of the vertex if the object is from Blender
+			if (obj_from_blender)
+			{
+				transformed_vertex.z *= -1;
+			}
 
 			// Project the current vertex
 			vec2_t projected_point = project(transformed_vertex);
