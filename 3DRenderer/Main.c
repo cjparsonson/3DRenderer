@@ -82,8 +82,8 @@ void update(void)
 
 	// Rotate cube
 	mesh.rotation.x += 0.01;
-	mesh.rotation.y += 0.01;
-	mesh.rotation.z += 0.01;
+	mesh.rotation.y += 0.00;
+	mesh.rotation.z += 0.00;
 
 	// Loop through all faces
 	int num_faces = array_length(mesh.faces);

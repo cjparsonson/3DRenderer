@@ -65,7 +65,7 @@ void load_obj_file_data(char* filename)
 	// Read the contents of the obj file and
 	// load the vertices and faces in our mesh.vertices and mesh.faces arrays
 	FILE* file;
-	char str[50];
+	char str[1024];
 	fopen_s(&file, filename, "r");
 	if (!file)
 	{
@@ -75,10 +75,11 @@ void load_obj_file_data(char* filename)
 	// Each line of the file which begins with a single v is a vertex and needs to be read and pushed to the mesh.vertices array
 	// Each line of the file which begins with a single f is a face and needs to be read and pushed to the mesh.faces array 
 	// However faces are stored like this: f 1/1/1 2/2/2 3/3/3 and we only need the first number of each group
-	while (fgets(str, 50, file) != NULL)
+	while (fgets(str, 1024, file) != NULL)
 	{
 		if (str[0] == 'v' && str[1] == ' ')
 		{
+			// Vertex information
 			vec3_t vertex;
 			if (sscanf_s(str, "v %f %f %f", &vertex.x, &vertex.y, &vertex.z) == 3)
 			{
@@ -87,8 +88,9 @@ void load_obj_file_data(char* filename)
 		}
 		else if (str[0] == 'f' && str[1] == ' ')
 		{
+			// Face information
 			face_t face;
-			// Temporary variables to store the face information
+			// Temporary variables to store the face information - vertex, texture, and normal
 			int v1, v2, v3;
 			int t1, t2, t3;
 			int n1, n2, n3;
